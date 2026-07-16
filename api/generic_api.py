@@ -1,6 +1,7 @@
 from typing import TypeVar
 from api.api_client import ApiClient
 from api.api_result import ApiResult
+from models.model_parser import ModelParser
 
 T = TypeVar("T")
 
@@ -18,8 +19,9 @@ class GenericApi:
 
     def get_by_id(self, entity_id: int) -> ApiResult[T]:
         response = self.client.get(f"{self.endpoint}/{entity_id}")
-        model = self.model.from_dict(
-            response.json()
+        model = ModelParser.parse(
+            response.json(),
+            self.model
         )
 
         return ApiResult(
@@ -30,9 +32,14 @@ class GenericApi:
 
     def get_all(self) -> ApiResult[list[T]]:
         response = self.client.get(self.endpoint)
-        models = [self.model.from_dict(result)
-                  for result in self.client.get(self.endpoint).json()
-                  ]
+        models = [
+            ModelParser.parse(
+                result ,
+                self.model
+            )
+            for result in response.json()
+        ]
+    
 
         return ApiResult(
             response=response,
@@ -41,7 +48,11 @@ class GenericApi:
     
     def create(self, data: dict) -> ApiResult[T]:
         response = self.client.post(self.endpoint, data=data)
-        model = self.model.from_dict(response.json())
+        model = ModelParser.parse(
+            response.json(),
+            self.model
+        )
+        #self.model.from_dict(response.json())
 
         return ApiResult(
             response=response,

@@ -13,7 +13,7 @@ class Comment:
     email: str
     body: str
 
-    @classmethod
-    def from_dict(cls, data: dict) -> Comment:
-        return cls(**data
-        )
+    # @classmethod
+    # def from_dict(cls, data: dict) -> Comment:
+    #     return cls(**data
+    #     )

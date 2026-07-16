@@ -9,7 +9,7 @@ class Product:
     body: str
 
 
-    @classmethod
-    def from_dict(cls, data: dict) -> Product:
-        return cls(**data
-        )
+    # @classmethod
+    # def from_dict(cls, data: dict) -> Product:
+    #     return cls(**data
+    #     )

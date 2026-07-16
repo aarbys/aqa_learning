@@ -8,8 +8,7 @@ class User:
     name: str
     email: str
 
-
-    @classmethod
-    def from_dict(cls, data: dict) -> User:
-        return cls(**data
-        )
+    # @classmethod
+    # def from_dict(cls, data: dict) -> User:
+    #     return cls(**data
+    #     )

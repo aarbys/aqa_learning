@@ -9,7 +9,7 @@ T = TypeVar("T")
 class ApiClient:
     def __init__(self, token: str | None = None, 
                  base_url: str = BASE_URL, 
-                 timeout: int = 5):
+                 timeout: int = 30):
         self.base_url = base_url
         self.headers = {}
         self.timeout = timeout
