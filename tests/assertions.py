@@ -1,13 +1,14 @@
 from dataclasses import fields  
 
-from api.api_result import Response
+
 from typing import TypeVar
 
 T = TypeVar("T")
 
-def assert_models_equal(model:T, expected_model: T, ignore_fields:list):
+def assert_models_equal(model:T, expected_model: T, ignore_fields:set[str]|None = None):
+    ignore_fields = ignore_fields or set()
     for field in fields(model):  
-        if field in ignore_fields:
+        if field.name in ignore_fields:
             continue
         expected = getattr(expected_model,field.name)
         actual = getattr(model,field.name)
@@ -17,27 +18,23 @@ def assert_models_equal(model:T, expected_model: T, ignore_fields:list):
 
 
 
-def assert_status(api_result: type[T], expected_status_code:int):
+def assert_status(api_result: T, expected_status_code:int):
     assert api_result.response.status_code == expected_status_code, \
     f"Incorrect status code. Expected: {expected_status_code}\nActual: {api_result.response.status_code}"
     
     
     
-def assert_model_list(api_result:type[T],expected_model:T):
-    assert isinstance(api_result.data, list)
-    assert len(api_result.data) > 0, \
+def assert_model_list(api_result,expected_model:T):
+    assert isinstance(api_result, list)
+    assert len(api_result) > 0, \
         'Empty data'
     
-    for model in api_result.data:
+    for model in api_result:
         assert isinstance(model, expected_model)
-        assert model.id is not None
-        assert model.name is not None
-        assert model.email is not None
+        for field in fields(model):
+            assert getattr(model, field.name) is not None
 
 
-def assert_valid_id(api_result:type[T]):
-    assert isinstance(api_result.data.id, int)
-    assert api_result.data.id > 0
-# (...)
-# (...)
-# assert_valid_id(...)
+def assert_valid_id(result_id):
+    assert isinstance(result_id, int)
+    assert result_id > 0

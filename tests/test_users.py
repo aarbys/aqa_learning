@@ -48,13 +48,13 @@ def test_create_new_user(user_api: UserApi):
                         expected_model=expected_user,
                         ignore_fields=["id"])
 
-    assert_valid_id(api_result)
+    assert_valid_id(api_result.data.id)
 
 
 def test_get_all_users(user_api: UserApi):
     api_result = user_api.get_all_users()
-    assert_model_list(api_result=api_result,
-                      expected_model=User)
+    assert_model_list(api_result=api_result.data,
+                      expected_model=User)  
 
 
 @pytest.mark.parametrize(
@@ -101,5 +101,6 @@ def test_create_user_negative(user_data, expected_status, user_api: UserApi):
                              email=user_data['email']
                              )      
         
-        assert_status(api_result=api_result,expected_status=expected_status)
-        assert_models_equal(api_result.data,expected_user,["id"])
+        assert_status(api_result=api_result,expected_status_code=expected_status)
+        assert_models_equal(api_result.data,
+                            expected_user,["id"])
