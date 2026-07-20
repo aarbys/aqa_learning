@@ -8,4 +8,4 @@ T = TypeVar('T')
 @dataclass
 class ApiResult(Generic[T]):
     response: Response
-    data: T
+    data: T | None
