@@ -1,11 +1,11 @@
-from typing import TypeVar
+from typing import TypeVar, Generic
 from api.api_client import ApiClient
 from api.api_result import ApiResult
 from models.model_parser import ModelParser
 
 T = TypeVar("T")
 
-class GenericApi:
+class GenericApi(Generic[T]):
     def __init__(
         self,
         client: ApiClient,
@@ -48,11 +48,13 @@ class GenericApi:
     
     def create(self, data: dict) -> ApiResult[T]:
         response = self.client.post(self.endpoint, data=data)
-        model = ModelParser.parse(
-            response.json(),
-            self.model
-        )
-        #self.model.from_dict(response.json())
+        model = None
+        if 200<=response.status_code <300:
+            model = ModelParser.parse(
+                response.json(),
+                self.model
+            )
+        
 
         return ApiResult(
             response=response,

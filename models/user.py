@@ -4,10 +4,10 @@ from dataclasses import dataclass
 
 @dataclass
 class User:
-    id: int
     name: str
     email: str
-
+    phone: str
+    id: int | None = None
     # @classmethod
     # def from_dict(cls, data: dict) -> User:
     #     return cls(**data
