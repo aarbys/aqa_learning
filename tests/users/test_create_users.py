@@ -17,9 +17,9 @@ import pytest
     [
         (
             { # Correct person
-            "name": "Arbuz" + str(uuid4().int)[:3],
-            "email": "Arbuz" + str(uuid4())[:3] + "@example.com",
-            "phone": "+123123" + str(uuid4().int)[:3]
+            "name": "Arbuz",
+            "email": "Arbuz1@example.com",
+            "phone": "+123123"
             })
     ]
 )

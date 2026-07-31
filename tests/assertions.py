@@ -55,6 +55,3 @@ def assert_error_type(error_type,expected_error_type) -> None:
     assert error_type.lower() == expected_error_type.lower()
     
     
-    
-def assert_is_none(data):
-    assert data is None

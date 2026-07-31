@@ -52,7 +52,6 @@ class GenericApi(Generic[T]):
     def create(self, data: dict) -> ApiResult[T]:
         response = self.client.post(self.endpoint, data=data)
         model = None
-        
         if 200<=response.status_code <300:
             model = ModelParser.parse(
                 response.json(),
