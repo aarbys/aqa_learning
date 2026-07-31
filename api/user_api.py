@@ -14,6 +14,5 @@ class UserApi:
         return self.generic_api.get_all()
 
     def create_user(self, user_data: dict) -> ApiResult[User]:
-
         return self.generic_api.create(user_data)
 
