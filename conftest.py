@@ -3,7 +3,7 @@ import pytest
 from api.user_api import UserApi
 from api.api_client import ApiClient
 from api.generic_api import GenericApi
-
+from tests.factories.user_factory import build_user_data
 
 from models.user import User
 

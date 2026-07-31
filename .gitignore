@@ -1,7 +1,27 @@
-.venv/
+# Python
 __pycache__/
+*.py[cod]
+
+# Virtual environment
+.venv/
+venv/
+
+# Pytest
 .pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
 .idea/
 .vscode/
-*.pyc
+
+# Environment variables
+.env
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# OS
 .DS_Store
