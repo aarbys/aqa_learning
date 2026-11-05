@@ -45,3 +45,46 @@ aqa_learning/
 * **HTTP-клиент:** Requests
 * **Валидация:** Pydantic / Data Models
 * **Зависимости:** `requirements.txt` (управление пакетами через pip) и `pyproject.toml`
+
+---
+
+## 🚀 Локальный запуск тест-кейсов
+
+Чтобы развернуть проект и запустить тест-кейсы на локальной машине, выполните следующие шаги в терминале:
+
+### 1. Подготовка окружения
+Склонируйте репозиторий и перейдите в его корневую папку:
+```bash
+git clone https://github.com/aarbys/aqa_learning
+cd aqa_learning
+
+```
+
+### 2. Активация виртуального окружения
+* **Windows (PowerShell):**
+  ```bash
+  python -m venv .venv
+  .venv\Scripts\Activate.ps1
+  ```
+* **Linux / macOS:**
+  ```bash
+  python3 -m venv .venv
+  source .venv/bin/activate
+  ```
+
+### 3. Установка зависимостей
+Установите все необходимые для работы фреймворка библиотеки:
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Запуск тестов
+Для прогона тест-кейсов используйте команды `pytest`:
+* **Запуск всех тестов:**
+  ```bash
+  pytest
+  ```
+* **Запуск с подробным выводом (verbose режим):**
+  ```bash
+  pytest -v
+  ```
